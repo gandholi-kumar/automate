@@ -1,0 +1,5 @@
+# Created at 2025-10-02T23:49:33.642
+Boot Manifest-JAR contains absolute paths in classpath 'H:\Daily_Pratice\CSharp\automate\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

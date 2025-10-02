@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-10-02T23:37:37 IST" name="Default suite" finished-at="2025-10-02T23:37:47 IST" duration-ms="10332">
+    <groups>
+    </groups>
+    <test started-at="2025-10-02T23:37:37 IST" name="Default test" finished-at="2025-10-02T23:37:47 IST" duration-ms="10332">
+      <class name="com.winapppackage.winApp">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.winapppackage.winApp@3c419631]" started-at="2025-10-02T23:37:37 IST" name="setUp" finished-at="2025-10-02T23:37:39 IST" duration-ms="2124" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testFillFormAndHandlePopup()[pri:0, instance:com.winapppackage.winApp@3c419631]" started-at="2025-10-02T23:37:39 IST" name="testFillFormAndHandlePopup" finished-at="2025-10-02T23:37:45 IST" duration-ms="5588" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFillFormAndHandlePopup -->
+        <test-method signature="testClickFirstRowIfExists()[pri:0, instance:com.winapppackage.winApp@3c419631]" started-at="2025-10-02T23:37:45 IST" name="testClickFirstRowIfExists" finished-at="2025-10-02T23:37:46 IST" depends-on-methods="com.winapppackage.winApp.testFillFormAndHandlePopup" duration-ms="1547" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickFirstRowIfExists -->
+        <test-method signature="testDeleteFirstRowIfExists()[pri:0, instance:com.winapppackage.winApp@3c419631]" started-at="2025-10-02T23:37:46 IST" name="testDeleteFirstRowIfExists" finished-at="2025-10-02T23:37:47 IST" depends-on-methods="com.winapppackage.winApp.testClickFirstRowIfExists" duration-ms="991" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteFirstRowIfExists -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.winapppackage.winApp@3c419631]" started-at="2025-10-02T23:37:47 IST" name="tearDown" finished-at="2025-10-02T23:37:48 IST" duration-ms="96" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.winapppackage.winApp -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
