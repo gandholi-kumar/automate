@@ -19,11 +19,42 @@ import io.appium.java_client.windows.WindowsElement;
 public class winApp {
 
 	private static WindowsDriver<?> driver = null;
+	private static Process winAppDriverProcess = null;
 
 	@BeforeClass
 	public void setUp() throws MalformedURLException {
+		String winAppDriverPath = System.getProperty("winappdriver.path");
+		if (winAppDriverPath == null || winAppDriverPath.isEmpty()) {
+			winAppDriverPath = System.getenv("WINAPPDRIVER_PATH");
+		}
+		if (winAppDriverPath == null || winAppDriverPath.isEmpty()) {
+			throw new RuntimeException("WinAppDriver.exe path not set. Please set the 'winappdriver.path' system property or 'WINAPPDRIVER_PATH' environment variable.");
+		}
+
+		String windowsAppFormPath = System.getProperty("windowsappform.path");
+		if (windowsAppFormPath == null || windowsAppFormPath.isEmpty()) {
+			windowsAppFormPath = System.getenv("WINDOWS_APPFORM_PATH");
+		}
+		if (windowsAppFormPath == null || windowsAppFormPath.isEmpty()) {
+			throw new RuntimeException("WindowsAppForm.exe path not set. Please set the 'windowsappform.path' system property or 'WINDOWS_APPFORM_PATH' environment variable.");
+		}
+
+		// Start WinAppDriver if not already running
+		if (!isWinAppDriverRunning()) {
+			try {
+				ProcessBuilder pb = new ProcessBuilder(winAppDriverPath);
+				pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+				pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+				winAppDriverProcess = pb.start();
+				// Wait a bit for WinAppDriver to start
+				Thread.sleep(2000);
+			} catch (Exception e) {
+				throw new RuntimeException("Failed to start WinAppDriver", e);
+			}
+		}
+
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("app", "C:\\Users\\User\\Desktop\\publish\\WindowsAppForm.exe");
+		capabilities.setCapability("app", windowsAppFormPath);
 		capabilities.setCapability("platformName", "Windows");
 		capabilities.setCapability("deviceName", "WindowsPC");
 		try {
@@ -32,6 +63,16 @@ public class winApp {
 			e.printStackTrace();
 		}
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+
+	private boolean isWinAppDriverRunning() {
+		try {
+			java.net.Socket socket = new java.net.Socket("127.0.0.1", 4723);
+			socket.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Test
@@ -137,6 +178,10 @@ public class winApp {
 	public void tearDown() {
 		if (driver != null) {
 			driver.quit();
+		}
+		if (winAppDriverProcess != null) {
+			winAppDriverProcess.destroy();
+			winAppDriverProcess = null;
 		}
 	}
 }
